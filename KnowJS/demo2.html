@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this词法</title>
+</head>
+<body>
+    <script>
+        var a = 2;
+        function demo1() { //动态作用域 如果具有动态作用域输出的是3，但是现在输出的是2
+            console.log(a);
+        }
+        function bar() {
+            var a = 3;
+            demo1();
+        }
+        // bar ();
+
+        var demo2 = a => { // ES6 写法
+            console.log(a)
+        }
+        // demo2(2);
+
+        var obj = { // this 词法 这个是有问题的函数
+            id: "awesome",
+            cool: function coolFn() {
+                console.log(this.id)
+            }
+        };
+        var id = "not awesome"
+        // obj.cool(); // awesome
+        // setTimeout (obj.cool,100 ); // no awesome 这边丢失了同this的绑定 需要改成下面的样子
+
+
+        var obj1 = { // 上面的函数自己修改 还是错的，所以还是不能这样写，再次修改后就可以了。
+            id: "awesome",
+            cool: function coolFn() {
+                // var self = this;
+                // setTimeout (function timers(){ //用这种写法是可以的，然后把self写在此函数外
+                //     console.log(self.id);
+                // },100)
+                setTimeout(() => { //这是上面那个函数的ES6写法
+                    console.log(this.id);
+                }, 100)
+            }
+        };
+        var id = "not awesome"
+        // obj1.cool(); // awesome
+        // setTimeout (obj1.cool,100 ); // no awesome 这边丢失了同this的绑定 需要改成下面的样子
+
+
+        function demo3(num) {  //其实这边还是不太懂
+            console.log("foo: " + num);
+            this.count++;  // 记录foo被调用的次数 此时的this指向的是window而不是当前函数 ，吧this换成demo3就可以了
+        }
+        demo3.count = 0; //注释掉这个会找不到demo3.count这个属性
+        var i;
+        for (i = 0; i < 10; i++) {
+            // demo3(i); //或者在这边写成 demo3.call(i) ,call()方法强制this指向函数对象demo3本身
+        }
+        // console.log(demo3.count); // 0 -- WTF?
+
+        function demo4() {
+            var a = 2;
+            this.case4();
+        }
+        function case4() {
+            console.log(a); //打印出来是2，6.0版本修改了很多大量的问题所以这边不会报错
+        }
+        // demo4();
+
+        var o = { prop: 37 };
+        function independent() {
+            return this.prop; //函数中的this将指向o.b,这与o上面的对象就没有关系了
+        }
+        // o.b = { g: independent, prop: 42 };
+        // console.log(o.b.g()); // 42
+    </script>
+</body>
+
+</html>

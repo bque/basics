@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jqueryCase1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jquery-3.2.1.js"></script>
+    <style>
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        li {
+            list-style-type: none;
+            padding: 5px;
+        }
+
+        .content {
+            background: #dcdcdc;
+            width: 250px;
+            padding: 10px;
+            color: #fff;
+        }
+
+        .list>li {
+            border: 1px solid #a39f9f;
+        }
+
+        li>ul {
+            display: none;
+        }
+
+        .current {
+            background: rgb(133, 169, 236);
+        }
+
+        .brand {
+            width: 400px;
+            border: 1px solid #dcdcdc;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .brand ul li {
+            display: inline-block;
+        }
+        /* .brand ul li:nth-child(6)~li {
+            display: none;
+        } */
+        .brand ul {
+            padding-left: 0 !important;
+        }
+
+        .showMore {
+            border: 1px solid #dcdcdc;
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .showMore a {
+            color: #333;
+        }
+
+        .promoted {
+            color: #0007ff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="content">
+        <ul class="list">
+            <li>
+                <a href="#">衬衫</a>
+                <ul>
+                    <li>短袖衬衫</li>
+                    <li>长袖衬衫</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">卫衣</a>
+                <ul>
+                    <li>短袖卫衣</li>
+                    <li>长袖卫衣</li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">裤子</a>
+                <ul>
+                    <li>七分裤</li>
+                    <li>九分裤</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <table id="tb">
+            <tbody>
+                <tr>
+                    <td>第一行</td>
+                </tr>
+                <tr>
+                    <td>第二行</td>
+                </tr>
+                <tr>
+                    <td>第三行</td>
+                </tr>
+                <tr>
+                    <td>第四行</td>
+                </tr>
+                <tr>
+                    <td>第五行</td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="brand">
+        <ul>
+            <li>佳能</li>
+            <li>三洋</li>
+            <li>微米</li>
+            <li>拍得丽</li>
+            <li>通用</li>
+            <li>明基</li>
+            <li>索尼</li>
+            <li>德之杰</li>
+            <li>松下</li>
+            <li>理光</li>
+            <li>奥林巴斯</li>
+            <li>爱国者</li>
+        </ul>
+        <div class="showMore">
+            显示全部品牌
+        </div>
+    </div>
+    <script>
+        var $j = jQuery.noConflict(); //可以避免和其他的库冲突很好用 后面的这个jQuery.noConflict()其实是将变量$的控制权让渡给prototype
+        $j(function () { // 这个是$（document）.ready 的简写法 建议一行写一个操作
+            $j(".list > li > a ").click(function () {
+                $j(this).addClass("current") // 给当前元素添加class
+                    .next().show() // 下一个元素显示
+                    .parent().siblings().children("a").removeClass("current")  // 同级元素a移除current样式
+                    .next().hide(); // 它们的下一个元素隐藏
+                return false;
+            });
+            var trs = $j("tbody tr:even").css("background", "#dcdcdc");
+
+            var morlist = $j(".brand ul li:gt(6)")
+            morlist.hide();
+            $j(".showMore").click(function () {
+                if (morlist.is(":visible")) { // 如果元素是显示
+                    morlist.hide();
+                    $j("li").removeClass("promoted")
+                    $j(this).text("显示全部品牌");
+                } else {
+                    morlist.show();
+                    $j(this).text("精简显示品牌");
+                    $j("li").filter(":contains('三洋')")
+                        .addClass("promoted")
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

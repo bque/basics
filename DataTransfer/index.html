@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>拖放练习</title>
+    <style>
+        #container {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #dcdcdc;
+        }
+
+        #images {
+            width: 150px;
+            height: 80px;
+        }
+    </style>
+
+    <script>
+        function drop (val) {
+            val.preventDefault();
+            var datas = val.dataTransfer.getData("Text") // 方法接受指定类型的拖放 利用dataTransfer.getData()方法获得拖放数据
+            val.target.appendChild(document.getElementById(datas)); // 
+        }
+        function confine(val) {
+            val.preventDefault() // 默认情况下,数据/元素不能在其他元素中被拖放。对于drop我们必须防止元素的默认处理
+        }
+        function start(val) {
+            val.dataTransfer.setData("Text", val.target.id) // 类型，数据, 方法设置数据类型和拖动的数据
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="container" ondrop="drop(event)" ondragover="confine(event)"></div>
+    <img id="images" ondragstart="start(event)" src="https://cdn.static.qdfuns.com/images/logos/logo.png">
+</body>
+
+</html>

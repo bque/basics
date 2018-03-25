@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>常用表单元素</title>
+</head>
+<body>
+    <form action="" method="POST"> <!-- action指向的是表单提交到哪里 method的属性是指提交方式的请求-->
+        基本的文本框：<input type="text" name="uesrname" id="username"><!-- id作为元素的唯一标识符，name作为与服务器交互数据的HTML元素的服务器端的标示。 -->
+        不能修改值的文本框：<input type="text" name="username" readonly value="不可修改"> <!--readonly属性指定文本框内的值不允许修改,可允许js修改-->
+        首次加载禁用的文本框： <input type="text"name="username" disabled value="禁用">
+        密码框：<input type="password">
+    </form>
+</body>
+</html>

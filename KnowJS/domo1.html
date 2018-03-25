@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域及块级作用域</title>
+</head>
+
+<body>
+    <script>
+        var f = 15;
+        function foo() {
+            var b = 2
+            function bar() {
+                var a = 5
+                console.log(f) // 2
+            }
+            //console.log(a)//a is nodefind
+            bar();
+        }
+        function case1() {
+            console.log(b) //别的函数调用不到其他的变量啊,
+        }
+        // foo();
+        // case1();
+        function letOrVar() {//let 和 var 作用域区别,循环和闭包
+            //var
+            for (var i = 0; i < 5; i++) {
+                console.log("var定时器外面：" + i)// 所有的回调函数是在循环结束后才执行的，所以下面那个函数只输出 5，但是为什么会被输出5次捏？？？？？
+                setTimeout(function () { //如果把函数去掉的话他的效果是跟下面是一样的,还有一个就是用闭包的方法在下面,setTimeout 方法用于在指定的毫秒数后调用函数或计算表达式。
+                    console.log("var：" + i);
+                })
+            }
+            console.log(i + "这个是在for外部")// 5这个是在for外部
+            //var 闭包
+            // for (var i = 0; i < 5; i++) {
+            //     (function (i) {
+            //         setTimeout(function () {
+            //             console.log("闭包var" + i);
+            //         })
+            //     })(i);
+            // }
+            // let
+            // for (let i = 0; i < 5; i++) {
+            //     setTimeout(function () {
+            //         console.log("let" + i);
+            //     })
+            // }
+        }
+        // letOrVar();
+        // (
+        function demo2(a) {
+            var f = 3;
+
+            console.log(a + f);// 5 f为全局变量
+        }
+        // )(2)//这种写法为立即执行函数
+        // demo2(2)
+        function demo3() { // let作用域
+            var foo = true;
+            if (foo) {
+                let bar = foo * 2;
+            }
+            console.log(bar);// bar is not defind 使用let所以找不到bar，但是换成var 就是2
+        }
+        // demo3();
+        function demo4() { //变量提升
+            a = 2;
+            var a;
+            console.log(a); // 2  应为声明会被提前，而赋值会被留在原地等待执行。
+            console.log(b); // undefined
+            var b = 5;
+        }
+        // demo4();
+        function demo5() { //闭包
+            var a = 2;
+            function bar1() { // 一般demo5执行后内部作用域会被销毁，然而闭包可以阻止这个发生。使作用域继续给bar1使用。所以作用域一直存在
+                console.log(a);
+            }
+            case12()
+            return bar1;
+        }
+        // var case5 = demo5();//不注释掉你的话case12会被执行出来。
+        // case5();
+        function case12() {
+            console.log("闭包的表现")// 比返回的东西还先展示出来
+        }
+
+        function demo6() { //循环和闭包
+            for (let i = 1; i <= 5; i++) { // 将var改成let 函数里打印出来的值不再全是6了。
+                setTimeout(function timer() {
+                    console.log(i);
+                }, i * 1000)
+            }
+        }
+        // demo6();
+
+        function demo7() { //循环和闭包
+            for (var i = 1; i <= 5; i++) {
+                (function (i) {
+                    setTimeout(function timer() {
+                        console.log(i);
+                    }, i * 1000);
+                })(i);
+            }
+        }
+        // demo7();
+
+        function demo8() { //模块
+            var something = "cool";
+            var another = [1, 2, 3];
+            function doSomething() {
+                return something;
+            }
+            function doAnother() {
+                console.log(another.join("!"));
+            }
+            return {
+                doSomethings: doSomething,
+                doAnother: doAnother
+            };
+        }
+        // var foo1 = demo8();
+        // console.log(foo1.doSomethings()+"第一个")
+        // console.log(foo1.doAnother()+"第二个") // function没有return默认是undefined，return的话是可以输出的
+
+        function demo9(id) { //修改模块的值   这一块还是要加强看，完全看不懂
+            function change() {
+                publicAPI.identify = second;
+            };
+            function first() {
+                console.log(id);
+            };
+            function second() {
+                console.log(id.toUpperCase()); // 吧字符串转化为大写
+            };
+
+            var publicAPI = {
+                change: change,
+                identify: first
+            };
+            return publicAPI;
+        };
+        // console.log(demo9("foo module").identify()+"第一个")
+        // console.log(demo9("foo module").change()+"第二个")
+        // console.log(demo9("foo module").identify()+"第三个")//不知道为啥么这个没反应没有改变他的值
+
+
+        function addSquares(a, b) { //闭包MDN上的
+            function square(x) {
+                return x * x;
+            }
+            return square(a) + square(b);
+        }
+        a = addSquares(2, 3); // returns 13f
+        b = addSquares(3, 4); // returns 25
+        c = addSquares(4, 5); // returns 41
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+        function outside(x) { //这还是闭包的内容
+            function inside(y) {
+                return x + y;
+            }
+            console.log(inside);
+            return inside;
+        }
+        // fn_inside = outside(3); // Think of it like: give me a function that adds 3 to whatever you give it
+        // result = fn_inside(5); // returns 8
+
+        // result1 = outside(3)(5); // returns 8
+
+        function demo10() { //命名冲突 使用最近的
+            var x = 5;
+            function case10(x) {
+                console.log(x * 2)
+                return x * 2;
+            }
+            return case10;
+        }
+
+        // demo10()(10); // returns 20 
+
+        function multiply(a, b = 1) { //设置默认值，b就是默认值
+            console.log(a * b)
+            return a * b;
+        }
+
+        // multiply(5,6); // 5
+
+        function Person() {
+            // The Person() constructor defines `this` as itself.
+            this.age = 0;// 解决方法用，给this定义一个新的变量
+            // setInterval(function growUp() { //这个函数是属于全局的函数 setInterval，但是全局里面没有age，所以   
+            //     this.age++;
+            // }, 1000);
+            setInterval(() => { //ES6写法
+                this.age++;
+            }, 1000)
+        }
+        var p = new Person();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Number guessing game</title>
+
+    <style>
+        html {
+            font-family: sans-serif;
+        }
+
+        body {
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+
+        .lastResult {
+            color: white;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number guessing game</h1>
+
+    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your
+        guess was too high or too low.</p>
+
+    <div class="form">
+        <label for="guessField">Enter a guess: </label>
+        <input type="text" id="guessField" class="guessField">
+        <input type="submit" value="Submit guess" class="guessSubmit">
+    </div>
+
+    <div class="resultParas">
+        <p class="guesses"></p>
+        <p class="lastResult"></p>
+        <p class="lowOrHi"></p>
+    </div>
+
+    <script>
+        // 这个是我的版本 ，完全写不出来
+        // var randomNum = Math.floor((Math.random() * 100) + 1) //获取1到100的随机数
+        // //   for(var i = 1; i<=10; i++){ //玩家从1开始
+
+        // //   }
+        // function games(val) { //为玩家提供一个猜游戏的方法
+        //     var inputVal = document.getElementById("guessField").value //获取用户输入的值
+        //     if (inputVal == randomNum) { //检查是否是正确数字
+        //         console.log("恭喜你闯关成功")
+        //     } else {
+        //         console.log("很遗憾失败了")
+        //     }
+        // }
+        // var btn = document.querySelector(".guessSubmit")
+        // btn.addEventListener("click", games) //指定元素添加点解事件句柄
+
+        // 这个是官方版本
+        
+    </script>
+</body>
+
+</html>
