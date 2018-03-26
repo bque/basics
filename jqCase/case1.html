@@ -47,9 +47,11 @@
         .brand ul li {
             display: inline-block;
         }
+
         /* .brand ul li:nth-child(6)~li {
             display: none;
         } */
+
         .brand ul {
             padding-left: 0 !important;
         }
@@ -138,6 +140,19 @@
             显示全部品牌
         </div>
     </div>
+
+    <!-- <div class="fruits">
+        <ul>
+            <li title="苹果">苹果</li>
+            <li title="橘子">橘子</li>
+            <li title="菠萝">菠萝</li>
+            <li title="哈蜜瓜">哈蜜瓜</li>
+        </ul>
+    </div> -->
+
+
+
+    <a href="#" title="提示什么的" style="color: #333">可以有提示么？</a>
     <script>
         var $j = jQuery.noConflict(); //可以避免和其他的库冲突很好用 后面的这个jQuery.noConflict()其实是将变量$的控制权让渡给prototype
         $j(function () { // 这个是$（document）.ready 的简写法 建议一行写一个操作
@@ -153,17 +168,28 @@
             var morlist = $j(".brand ul li:gt(6)")
             morlist.hide();
             $j(".showMore").click(function () {
-                if (morlist.is(":visible")) { // 如果元素是显示
-                    morlist.hide();
-                    $j("li").removeClass("promoted")
-                    $j(this).text("显示全部品牌");
-                } else {
-                    morlist.show();
+                morlist.toggle();  //这边是改进后的方法
+                $j("li").filter(":contains('三洋')")
+                    .toggleClass("promoted")
+                if (morlist.is(":visible")) {
                     $j(this).text("精简显示品牌");
-                    $j("li").filter(":contains('三洋')")
-                        .addClass("promoted")
+                } else {
+                    $j(this).text("显示全部品牌");
                 }
+                //     if (morlist.is(":visible")) { // 如果元素是显示
+                //         morlist.hide();
+                //         $j("li").removeClass("promoted")
+                //         $j(this).text("显示全部品牌");
+                //     } else {
+                //         morlist.show();
+                //         $j(this).text("精简显示品牌");
+                //         $j("li").filter(":contains('三洋')")
+                //             .addClass("promoted")
+                //     }
             });
+
+
+            // $j("ul").append($j("<li>榴莲</li>"))
         })
     </script>
 </body>

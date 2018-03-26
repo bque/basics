@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片提示</title>
+    <script src="jquery-3.2.1.js"></script>
+    <style>
+        .img-alt img {
+            width: 150px;
+            height: 150px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        li {
+            display: inline-block;
+        }
+
+        #tooltip {
+            width: 300px;
+            height: 300px;
+            position: absolute;
+        }
+
+        #tooltip div {
+            background-color: black;
+            color: #fff;
+            margin-top: -34px;
+            padding: 5px;
+            text-align: center;
+            z-index: 10;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img-alt">
+        <ul>
+            <li>
+                <img src="images/jx1.jpg" alt="剑三" title="剑三花姐">
+            </li>
+            <li>
+                <img src="images/jx2.jpg" alt="剑三" title="剑三炮哥">
+            </li>
+            <li>
+                <img src="images/jx3.jpg" alt="剑三" title="剑三道长">
+            </li>
+            <li>
+                <img src="images/jx4.jpg" alt="剑三" title="剑三花哥">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        $(function () {
+            var x = 10;
+            var y = 20;
+            $(".img-alt img").mouseover(function (e) {
+                this.myTitle = this.title;
+                this.title = '';
+                var imgTitle = this.myTitle ? "<div>" + this.myTitle + "</div>" : ""; // 提示文字
+                var toolimg = "<div id='tooltip'><img src='" + this.src + "'alt='产品预览图'/>" + imgTitle + "</div>";
+                $("body").append(toolimg); //添加div到文本中
+                $("#tooltip")
+                    .css({
+                        "top": (e.pageY + y) + "px",
+                        "left": (e.pageX + x) + "px"
+                    });
+            }).mouseout(function () {
+                this.title = this.myTitle;
+                $("#tooltip").remove(); //移除
+            })
+        });
+    </script>
+</body>
+
+</html>
