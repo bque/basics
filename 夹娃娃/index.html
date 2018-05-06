@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script type="text/javascript">
+		document.addEventListener('plusready', function () {
+			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+		});
+	</script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="domBox">
+			<div class="jixiebi">
+				<div class="jixiebiTou">
+				</div>
+				<div class="jixiezhuaL">
+				</div>
+				<div class="jixiezhuaR">
+				</div>
+				<div class="rabbitItem">
+				</div>
+			</div>
+			<div class="topBtn">
+				<div class="gameNum">
+					剩余<span class="gametime"> 3 </span>次
+				</div>
+				<div class="Btns">
+					<span class="helpBtn"></span>
+					<span class="jiangpinBtn"></span>
+				</div>
+			</div>
+			<div class="domBoxBg">
+
+			</div>
+			<div class="domBoxBg2">
+
+			</div>
+			<div class="rabbitBox">
+				<div class="smallRabbit">
+					<div class="smallRabbitItem">
+
+					</div>
+					<div class="smallRabbitItem smallyelloRabbit">
+
+					</div>
+					<div class="smallRabbitItem">
+
+					</div>
+					<div class="smallRabbitItem smallyelloRabbit">
+
+					</div>
+					<div class="smallRabbitItem ">
+
+					</div>
+					<div class="smallRabbitItem smallyelloRabbit">
+
+					</div>
+					<div class="smallRabbitItem">
+
+					</div>
+					<div class="smallRabbitItem smallyelloRabbit">
+
+					</div>
+				</div>
+				<div class="bigRabbit">
+					<div class="BigRabbitItem yelloRabbit">
+					</div>
+					<div class="BigRabbitItem">
+
+					</div>
+					<div class="BigRabbitItem yelloRabbit">
+
+					</div>
+					<div class="BigRabbitItem">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="control">
+	</div>
+	<div class="play"></div>
+	<div class="alret">
+		<h1>恭喜你获得6.18元</h1>
+		<img src="img/liwu.png" alt="" />
+	</div>
+
+	<div class="note module">
+		<div class="nip box ">
+			<div>
+				<h1>恭喜你，夹到兔子啦</h1>
+				<p>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~</p>
+				<div class="like">
+					<span class="likenum" id="likenum">268</span>人点赞
+				</div>
+			</div>
+		</div>
+		<div class="comment">
+			<div style="color: #4178f9;padding:10px;font-size:0.9rem;">最新评论</div>
+			<div>
+				<ul>
+					<li>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~,我要分享给我朋友 </li>
+					<li>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~，我要分享给我朋友</li>
+					<li>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~，我要分享给我朋友</li>
+					<li>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~，我要分享给我朋友</li>
+					<li>我终于夹到兔子了，手气好到爆炸，前面几次都有好东西，好玩~~~，我要分享给我朋友</li>
+					<li style="text-align:center;">加载完成</li>
+				</ul>
+			</div>
+			<div class="commentL">
+				我要评论
+			</div>
+			<div class="commentR">
+				点赞一下
+			</div>
+		</div>
+	</div>
+	<div class="fail box module">
+		<h2 s>好可惜！失败啦</h2>
+		<p style="font-size:0.6rem;">什么都没有夹到，请再试一次</p>
+		<p style="padding: 20px;font-size: 1rem;padding-top:35px;">再试一次</p>
+	</div>
+	<div class="gift box module">
+		<h1>恭喜你!成功了</h1>
+		<img src="img/liwu.png" alt="" />
+		<p style="color:#43b3f7;padding:10px;font-size: 0.7rem;">你获得一个抵用劵，你可以在我的礼物中查看！</p>
+		<p style="color:#9cadb7;padding:5px;">优惠码：256464adfada</p>
+		<p style="padding: 20px;font-size: 1.1rem;">再来一次</p>
+	</div>
+	<div class="whitebg"></div>
+	<div class="mark"></div>
+</body>
+<script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+<script type="text/javascript">
+	window.onload = function () {
+		var playGameBox = document.querySelector(".play"), //开始游戏按钮
+			gameNumBox = document.querySelector(".gameNum"), //游戏次数
+			helpBtnBox = document.querySelector(".helpBtn"), //帮助按钮
+			jiangpinBtnBox = document.querySelector(".jiangpinBtn"), //奖品按钮
+			smallRabbitBox = document.querySelector(".smallRabbit"), //小兔子行
+			smallRabbitItemBox = document.querySelector(".smallRabbitItem"), //小兔子
+			bigRabbitBox = document.querySelector(".bigRabbit"), //大兔子行
+			BigRabbitItemBox = document.querySelector(".BigRabbitItem"), //大兔子
+			markBox = document.querySelector(".mark"), //遮罩
+			jixiebiBox = document.querySelector(".jixiebi"), //机械臂
+			jixiezhuaLBox = document.querySelector(".jixiezhuaL"), //左爪
+			jixiezhuaRBox = document.querySelector(".jixiezhuaR"), //右爪
+			alertBox = document.querySelector(".alret"), //弹出层
+			rabbitItem = document.querySelector(".rabbitItem"); //夹娃娃
+		    note = document.querySelector(".note"); //字条
+		    gift = document.querySelector(".gift"); //礼盒
+		    fail = document.querySelector(".fail"); //失败
+		    whitebg = document.querySelector(".whitebg"); //白色背景
+            likenum = document.querySelector(".likenum")//点赞数
+            commentR = document.querySelector(".commentR")//点赞
+
+		var smallRabbitItemBoxW = smallRabbitBox.offsetWidth;
+		var bigRabbitItemBoxW = bigRabbitBox.offsetWidth;
+
+		var smallRabbitItemBoxAll = document.querySelectorAll(".smallRabbitItem");
+		var bigRabbitItemItemBoxAll = document.querySelectorAll(".BigRabbitItem");
+
+		bigRabbitBox.style.width = bigRabbitItemItemBoxAll.length * bigRabbitItemItemBoxAll[0].offsetWidth + "px"
+		smallRabbitBox.style.width = smallRabbitItemBoxAll.length * smallRabbitItemBoxAll[0].offsetWidth + "px"
+		// console.log(smallRabbitItemBoxAll.length + "-->" + smallRabbitItemBoxW)
+		// console.log(bigRabbitItemBoxW)
+		var bigtime = setInterval(function () {
+			$(bigRabbitBox).animate({
+				"left": -(bigRabbitItemItemBoxAll[0].offsetWidth) + "px"
+			}, 1000, "linear", function () {
+				$(".bigRabbit :first-child").appendTo($(bigRabbitBox));
+				$(bigRabbitBox).css("left", 0)
+			})
+		}, 30)
+		var smalltime = setInterval(function () {
+			$(smallRabbitBox).animate({
+				"left": -(smallRabbitItemBoxAll[0].offsetWidth) + "px"
+			}, 1000, "linear", function () {
+				$(".smallRabbit :first-child").appendTo($(smallRabbitBox));
+				$(smallRabbitBox).css("left", 0)
+			})
+		}, 30)
+		var success = false;
+		rabbitItem.onclick = function () {
+			var num = parseInt(100 * Math.random());
+			whitebg.style.display = "block";
+			if (num % 3 == 0) {
+				note.style.display = "block";
+			} else if (num % 3 == 1) {
+				gift.style.display = "block";
+			} else if (num % 3 == 2) {
+				fail.style.display = "block";
+			}
+		}
+		whitebg.onclick = function () {
+			whitebg.style.display = "none";
+			note.style.display = "none";
+			gift.style.display = "none";
+			fail.style.display = "none";
+		}
+		// note.onclick = function () {
+		// 	note.style.display = "none";
+		// 	whitebg.style.display = "none";
+		// }
+        commentR.onclick = function () {
+			var i=document.querySelector(".likenum").innerHTML;
+			var i=parseInt(i)+1;//parseInt解析字符串并返回一个整数
+			document.querySelector(".likenum").innerHTML=i;
+		}
+		playGameBox.onclick = function () {
+			var a=document.querySelector(".gametime").innerHTML;
+			if (a > 0) {
+			var a=parseInt(a)-1;
+			document.querySelector(".gametime").innerHTML=a;
+		}
+			jixiebiBox.style.height = 330 + "px"; //style.height设置高度
+			setTimeout(function () {
+				jixiezhuaLBox.style.transform = "rotate(0deg)"; // style.transform旋转角度
+				jixiezhuaRBox.style.transform = "rotate(0deg)";
+				rabbitItem.style.display = "none";
+
+				if (!success) {
+					setTimeout(function () {
+						jixiebiBox.style.height = 74.88 + "px";
+						jixiezhuaLBox.style.transform = "rotate(-30deg)";
+						jixiezhuaRBox.style.transform = "rotate(30deg)";
+						rabbitItem.style.display = "block";
+					}, 500)
+				} else {
+				}
+			}, 200)
+		}
+		if (success) {
+			clearInterval(bigtime);
+		}
+	}
+</script>
+
+</html>

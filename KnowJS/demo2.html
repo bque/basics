@@ -23,7 +23,6 @@
             console.log(a)
         }
         // demo2(2);
-
         var obj = { // this 词法 这个是有问题的函数
             id: "awesome",
             cool: function coolFn() {
@@ -31,7 +30,7 @@
             }
         };
         var id = "not awesome"
-        // obj.cool(); // awesome
+        obj.cool(); // awesome
         // setTimeout (obj.cool,100 ); // no awesome 这边丢失了同this的绑定 需要改成下面的样子
 
 

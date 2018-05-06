@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自定义</title>
+    <style>
+        #contain {
+            text-align: center;
+            padding-top: 50px;
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex: auto;
+        }
+
+        body {
+            position: absolute;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .iptStyle {
+            width: 15%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contain">
+        <input class="iptStyle" type="tel" maxlength="1" />
+        <input class="iptStyle" type="tel" maxlength="1" />
+        <input class="iptStyle" type="tel" maxlength="1" />
+        <input class="iptStyle" type="tel" maxlength="1" />
+        <input class="iptStyle" type="tel" maxlength="1" />
+        <input class="iptStyle" type="tel" maxlength="1" />
+    </div>
+    <button id="btn">删除</button>
+
+    <script>
+        var inputList = document.getElementsByTagName("input");
+        var btn = document.getElementById("btn");
+        var mainBody = document.body;
+        var numArray = [];
+
+        mainBody.onmousedown = function (event) {
+            event.preventDefault();/*阻止默认失去焦点事件*/
+        }
+        
+        for (let i = 0; i < inputList.length; i++) {
+            inputList[i].index = i;
+            inputList[i].setAttribute("readOnly", 'true');
+            inputList[0].removeAttribute("readOnly");
+            inputList[0].focus();
+
+            inputList[i].onkeyup = function () {
+                let nextIndex = i + 1;
+                if (i < 5) {
+                    inputList[i].setAttribute("readOnly", 'true');
+                    inputList[nextIndex].removeAttribute("readOnly");
+                    inputList[nextIndex].focus();
+                };
+                if(i<=5){
+                    console.log(i);
+                //   numArray.push(inputList[i].value);5
+                  
+                }
+
+                console.log(inputList[5].value);
+                // if(i<5){
+                //     title += inputList[i].value + '';
+                //     console.log(title);
+                // }
+                // if (inputList[5].value !== '') {
+                //     // console.log(title);
+                // }
+
+            };
+
+            btn.onmousedown = function (event) {
+                var focusObj = document.activeElement;
+                let lastindex = focusObj.index - 1;
+                if (lastindex >= 0) {
+                    inputList[lastindex].removeAttribute("readOnly");
+                    inputList[focusObj.index].setAttribute("readOnly", 'true');
+                    inputList[focusObj.index].value = '';
+                    inputList[lastindex].focus();
+                } else {
+                    inputList[0].value = '';
+                }
+            };
+        }
+
+
+    </script>
+</body>
+
+</html>

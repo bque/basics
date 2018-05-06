@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>星星评论</title>
+    <script src="jquery-3.2.1.js"></script>
+    <style>
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .contain img {
+            width: 40px;
+        }
+
+        .contain {
+            /* display: flex; */
+            display: table;
+        }
+
+        .score {
+            /* vertical-align: middle; */
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <ul>
+            <li>
+                <img src="star-empty.png" alt="星星">
+            </li>
+            <li>
+                <img src="star-empty.png" alt="星星">
+            </li>
+            <li>
+                <img src="star-empty.png" alt="星星">
+            </li>
+            <li>
+                <img src="star-empty.png" alt="星星">
+            </li>
+            <li>
+                <img src="star-empty.png" alt="星星">
+            </li>
+        </ul>
+        <div class="score">得分是：0.0</div>
+    </div>
+
+    <script>
+        $(function () {
+            var $contain = $(".contain")
+            var $star = $(".contain li");
+            // var $score = $(".score");
+            var num = 2;
+
+            function init(num) {
+                $star.each(function (index) {
+                    if (index < num) {
+                        $(this).children("img").attr("src", "star-full.png");
+                    } else {
+                        $(this).children("img").attr("src", "star-empty.png");
+                    }
+                })
+            };
+            init(num);
+            $star.on("mouseover", function () {
+                init($(this).index() + 1);
+                $star.on("click", function () {
+                    num = $(this).index() + 1;
+                })
+            });
+            $contain.on("mouseout", function () {
+                init(num);
+            })
+
+        })
+    </script>
+</body>
+
+</html>

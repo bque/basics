@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.2.1.js"></script>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .slider {
+            border: 1px solid #dcdcdc;
+            margin: 0 20px;
+            overflow: hidden;
+            height: 400px;
+        }
+
+        .title {
+            font-weight: 600;
+            padding-right: 15px;
+        }
+
+        .contain-header {
+            background: #d1cccc;
+            padding: 0px 10px;
+            height: 30px;
+            line-height: 30px;
+
+        }
+
+        .contain-header div {
+            display: inline-block;
+        }
+
+        .dot {
+            padding-right: 15px;
+        }
+
+        .dot div {
+            background: #fff;
+            width: 10px;
+            height: 10px;
+            vertical-align: middle;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .selected {
+            background: #00bcd4 !important;
+        }
+
+        .paging {
+            border: 1px solid #dcdcdc;
+            height: 16px;
+            position: relative;
+            line-height: 8px;
+            top: -4px;
+            background: #fff;
+            border-radius: 12%;
+            box-shadow: 1px 1px 1px #888;
+        }
+
+        .bt-left {
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-right: 6px solid #9e9e9e;
+            top: 3px;
+            position: relative;
+            cursor: pointer;
+            margin-right: 4px;
+        }
+
+        .bt-right {
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-left: 6px solid #9e9e9e;
+            top: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .more {
+            float: right;
+            vertical-align: middle;
+        }
+
+        .more a {
+            font-size: 14px;
+            color: #8f8a8a;
+        }
+
+        .contain img {
+            width: 100%;
+            height: 250px;
+        }
+
+        .contain {
+            width: 100%;
+            /* display: flex; */
+        }
+
+        .item {
+            padding: 12px;
+        }
+
+        .item img {
+            width: 280px;
+            height: 280px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="content">
+        外层div元素
+        <span>内层div元素</span>
+        外层div元素
+    </div>-->
+    <!-- <div id="msg"></div> 
+    <form action="case1.html">
+        用户名：<input type="text" id="username" placeholder="请输入用户名">
+        <input type="submit" value="提交" id="sub">
+    </form> -->
+
+    <div class="slider">
+        <div class="contain-header">
+            <div class="title">卡通动画</div>
+            <div class="dot">
+                <div class="selected">&nbsp;</div>
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+            </div>
+            <div class="paging">
+                <div class="bt-left"></div>
+                <div class="bt-right"></div>
+            </div>
+            <div class="more">
+                <a href="#">更多 >></a>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <div class="item">
+                    <img src="images/jx1.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    <img src="images/jx2.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    <img src="images/jx3.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    <img src="images/jx1.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    <img src="images/jx1.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+            <li>
+                <div class="item">
+                    <img src="images/jx1.jpg" alt="头像">
+                    <div>剑三</div>
+                    <div>剑三手绘3头像</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        // $(function () {
+        //     $("span").bind("click", function (e) {
+        //         var txt = $("#msg").html() + "<p>内层元素被点</p>";
+        //         $("#msg").html(txt);
+        //         e.stopPropagation();  //停止冒泡事件
+        //     });
+        //     $("#content").bind("click", function () {
+        //         var txt = $("#msg").html() +"<p>外层元素被点</p>";
+        //         $("#msg").html(txt);
+        //     });
+        //     $("body").bind("click", function () {
+        //         var txt = $("#msg").html() + "<p>body元素被点</p>";
+        //         $("#msg").html(txt);
+        //     });
+
+        //     $("#sub").bind("click",function(event){
+        //       var username =  $("#username").val();
+        //       if(username ==""){
+        //           $("#msg").html("<p>文本框不能为空</p>");
+        //             // event.preventDefault() // 阻止默认行为 ,一切阻止的行为都可以用return行为；          
+        //             return false;
+        //       }
+        //     })
+        // })
+
+        $(function () {
+            var page = 1; //初始化当前版面为一
+            var i = 4; // 每个版面放4张图片
+            
+            $(".bt-right").bind("click", function () {
+                var $v_width = $("ul").width();
+                
+            })
+        })
+    </script>
+</body>
+
+</html>
